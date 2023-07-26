@@ -17,6 +17,12 @@ steps:
     projects: '**/WebApp.csproj'
     feedsToUse: 'select'
 
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'SonarQube'
+    scannerMode: 'MSBuild'
+    projectKey: 'a9e25375a7ea355a7f05cfcf79d0d1da81d2fc8b'
+
 - task: DotNetCoreCLI@2
   displayName: Build Web App
   inputs:
@@ -37,6 +43,14 @@ steps:
     command: 'publish'
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+
+- task: SonarQubeAnalyze@5
+  inputs:
+    jdkversion: 'JAVA_HOME_11_X64'
+
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact (WebApp.zip)'
