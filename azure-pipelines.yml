@@ -21,3 +21,22 @@ steps:
   inputs:
     projects: '**/WebApp.csproj'
     arguments: '--configuration $(BuildConfiguration)'
+ 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**/*UnitTest*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+    testRunTitle: 'Run Unit Tests'
+
+- task: DotNetCoreCLI@2
+  displayName: Create Web App Package (.zip)
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
