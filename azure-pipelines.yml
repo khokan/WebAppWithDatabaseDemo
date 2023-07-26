@@ -17,6 +17,9 @@ steps:
     projects: '**/WebApp.csproj'
     feedsToUse: 'select'
 
+- task: PowerShell@2
+  inputs:
+    filePath: 'sonar-add-project-guid.ps1'
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'SonarQube'
@@ -44,6 +47,9 @@ steps:
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
 
+- task: SonarQubeAnalyze@5
+  inputs:
+    jdkversion: 'JAVA_HOME'
 - task: SonarQubePublish@5
   inputs:
     pollingTimeoutSec: '300'
