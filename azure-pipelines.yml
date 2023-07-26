@@ -17,9 +17,19 @@ steps:
     projects: '**/WebApp.csproj'
     feedsToUse: 'select'
 
-- task: PowerShell@2
-  inputs:
-    filePath: 'sonar-add-project-guid.ps1'
+- powershell: |
+     $paths = Get-ChildItem -include *.csproj -Recurse
+     foreach($pathobject in $paths) 
+     {
+         $path = $pathobject.fullname
+         $doc = New-Object System.Xml.XmlDocument
+         $doc.Load($path)
+         $child = $doc.CreateElement("ProjectGuid")
+         $child.InnerText = [guid]::NewGuid().ToString().ToUpper()
+         $node = $doc.SelectSingleNode("//Project/PropertyGroup")
+         $node.AppendChild($child)
+         $doc.Save($path)
+     }
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'SonarQube'
