@@ -18,8 +18,7 @@ steps:
     feedsToUse: 'select'
 
 - task: PowerShell@2
-  displayName: Prepare for Sonar Cloud
-  enabled: ${{ parameters.runCompletePipeline }}
+  displayName: Prepare for Sonar Cloud  
   inputs:
     targetType: 'inline'
     script: |
