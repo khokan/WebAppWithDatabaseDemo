@@ -46,8 +46,6 @@ steps:
     command: 'publish'
     publishWebProjects: true
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-
-- task: SonarQubeAnalyze@5
   
 - task: SonarQubePublish@5
   inputs:
