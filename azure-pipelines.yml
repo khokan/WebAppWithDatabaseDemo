@@ -6,7 +6,7 @@
 trigger:
 - master
 
-pool: kkagent
+pool: kagent
 
 steps:
 
