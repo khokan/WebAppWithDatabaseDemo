@@ -7,8 +7,17 @@ trigger:
 - master
 
 pool: kkagent
-  
+
+steps:
 
 - task: DotNetCoreCLI@2
   inputs:
-    command: 'build'
+    command: 'restore'
+    projects: '**/WebApp.csproj'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  displayName: Build Web App
+  inputs:
+    projects: '**/WebApp.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
