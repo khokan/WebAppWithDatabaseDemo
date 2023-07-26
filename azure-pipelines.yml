@@ -11,6 +11,7 @@ pool: kkagent
 steps:
 
 - task: DotNetCoreCLI@2
+  displayName: Restore Nuget Packages
   inputs:
     command: 'restore'
     projects: '**/WebApp.csproj'
@@ -23,6 +24,7 @@ steps:
     arguments: '--configuration $(BuildConfiguration)'
  
 - task: DotNetCoreCLI@2
+  displayName: Run Unit Tests
   inputs:
     command: 'test'
     projects: '**/*UnitTest*.csproj'
@@ -37,6 +39,7 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact (WebApp.zip)'
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
