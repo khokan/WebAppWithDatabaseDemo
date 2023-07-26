@@ -48,8 +48,7 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
 
 - task: SonarQubeAnalyze@5
-  inputs:
-    jdkversion: 'JAVA_HOME'
+  
 - task: SonarQubePublish@5
   inputs:
     pollingTimeoutSec: '300'
