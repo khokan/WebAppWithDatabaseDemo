@@ -9,3 +9,6 @@ trigger:
 pool: kkagent
   
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
