@@ -6,7 +6,8 @@
 trigger:
 - master
 
-pool: KKAgentPool
+pool: 
+  vimage: ubuntu-latest
 
 steps:
 
