@@ -40,7 +40,7 @@ steps:
   inputs:
     SonarQube: 'SonarQube'
     scannerMode: 'MSBuild'
-    projectKey: 'DotNetCoreMVC'
+    projectKey: 'khokon9821_dotnetcoremvc'
 
 - task: DotNetCoreCLI@2
   displayName: Build Web App
